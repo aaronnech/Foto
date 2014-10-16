@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Photography | Aaron Nech</title>
+        <meta name="description" content="Website dedicated to Aaron Nech's Photography">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <div class="photo-box" data-bind="visible: $root.displayPhoto">
+            <div class="overlay photoview-background" data-bind="click: onCloseDisplay">
+            </div>
+            <div class="content" data-bind="click: onCloseDisplay">
+                <img src="img/loader.gif" class="loader" />
+                <!-- ko with: currentPhoto -->
+                    <img data-bind="attr: {src : path}, event: {load : onLoad }">
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="header clearfix">
+            <h1><span class="not-bold">Aaron Nech</span> | Photography</h1>
+            <div class="categories">
+                <a href="#" class="category" data-bind="css: {active : isAllCategoryActive()}, click: onClickViewAll">All</a>
+                <!-- ko foreach: categories -->
+                    <a href="#" class="category" data-bind="css: {active : $root.isActiveCategory($data)}, text: $data, click: $root.onClickCategory($data)"></a>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="container clearfix" data-bind="foreach: getCurrentCategoryPhotos()">
+            <div class="photo left">
+                <div class="overlay" data-bind="click: function() { $root.onClickPhoto($root, $data) }"></div>
+                <img src="img/loader.gif" class="loader" />
+                <img class="photo-thumb" data-bind="attr: {src : smallPath}, event : {load : onLoad}" />
+            </div>
+        </div>
+        <div class="footer"></div>
+        <script src="js/vendor/knockout-3.2.0.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <!-- Init application -->
+        <script src="js/main.js"></script>
+    </body>
+</html>
